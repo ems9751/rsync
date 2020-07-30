@@ -1,0 +1,33 @@
+#!/bin/bash
+
+# Make Directories
+echo "Making Directories"
+sudo mkdir /mnt/usb
+sudo mkdir /mnt/system
+echo "Directories "/mnt/usb and /mnt/system" were made"
+echo "================================================="
+## Mount /dev/sd?
+echo="Mounting /dev drives"
+sudo mount /dev/sdb1   /mnt/usb
+sudo mount /dev/sda1   /mnt/system
+echo "/dev has been mounted"
+echo "====================="
+
+## Rsync in Progress
+
+sudo rsync -aAxv --delete --exclude="lost+found" /mnt/usb  /mnt/system
+
+echo "Rsync complete"
+echo "=============="
+
+## Unmount Drives
+sudo umount /mnt/usb
+sudo umount /mnt/system
+echo "Drives unmounted"
+echo "================"
+
+## Reboot
+echo " System will reboot"
+    
+sudo shutdown -r
+	
